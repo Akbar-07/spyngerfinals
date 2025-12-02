@@ -1047,6 +1047,60 @@
         </div>
     </div>
   <script src="./js/main.js"></script>
+  <script>
+        const navbar = document.querySelector('.Header_main-header__2jo1c');
+
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        function click_navbar() {
+            document.querySelector(".Language_language__top__MUENI").classList.toggle("Language_language__top-active__5vJvj")
+            document.querySelector(".active_navbar").classList.toggle("non_active")
+            document.querySelector(".for_background").classList.toggle("for_background_active")
+        }
+
+        function non_click() {
+            document.querySelector(".active_navbar").classList.remove("non_active")
+            document.querySelector(".for_background").classList.remove("for_background_active")
+            document.querySelector(".Language_language__top__MUENI").classList.remove("Language_language__top-active__5vJvj")
+        }
+
+         const faqItems = document.querySelectorAll('.FaqSection_faq__item__RbY_o');
+
+        faqItems.forEach(item => {
+            const top = item.querySelector('.FaqSection_faq__item-top__YjOl_');
+            const bottom = item.querySelector('.FaqSection_faq__item-bottom__2Ckmy');
+            const content = item.querySelector('.FaqSection_faq__item-bottom-desk__cNwo8');
+
+            // Har bir item uchun click event
+            top.addEventListener('click', function() {
+                // Agar ochiq bo'lsa
+                if (item.classList.contains('active')) {
+                    // Yopish
+                    item.classList.remove('active');
+                    bottom.style.maxHeight = '0px';
+                } else {
+                    // Boshqa ochiq itemlarni yopish (ixtiyoriy)
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                            otherItem.querySelector('.FaqSection_faq__item-bottom__2Ckmy').style.maxHeight = '0px';
+                        }
+                    });
+
+                    // Joriy itemni ochish
+                    item.classList.add('active');
+                    // Content ning haqiqiy balandligini olish va o'rnatish
+                    bottom.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
