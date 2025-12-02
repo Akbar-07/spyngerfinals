@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Continue with Google demo</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#fff;
+      --muted:#6b7280;
+      --accent:#1f2937;
+      --google-red: #ea4335;
+    }
+    body{
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, var(--bg), #e9eef8);
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      box-shadow: 0 6px 24px rgba(21,30,60,0.08);
+      padding:24px;
+      width:420px;
+      max-width:100%;
+    }
+    h1{ margin:0 0 8px; font-size:20px; color:var(--accent); }
+    p{ margin:0 0 18px; color:var(--muted); font-size:14px; }
+
+    /* Custom Google button (looks nice) */
+    .google-btn{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      border-radius:8px;
+      padding:10px 14px;
+      cursor:pointer;
+      user-select:none;
+      border:1px solid rgba(15,23,42,0.06);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset;
+      transition:transform .06s ease, box-shadow .08s ease;
+      background:white;
+    }
+    .google-btn:hover{ transform:translateY(-1px); box-shadow: 0 6px 16px rgba(20,30,60,0.06); }
+    .google-logo{
+      width:20px; height:20px; display:block;
+    }
+    .google-btn span{ font-weight:600; color:#111827; font-size:14px; }
+
+    /* area for Google rendered button (optional) */
+    #gsi-button { margin-top:12px; }
+
+    .profile{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-top:16px;
+      border-top:1px dashed #eef2ff;
+      padding-top:16px;
+    }
+    .avatar{ width:56px; height:56px; border-radius:999px; object-fit:cover; }
+    .meta{ font-size:14px; color:var(--muted); }
+    .meta strong{ display:block; color:var(--accent); font-size:15px; }
+    .signout{
+      margin-left:auto;
+      padding:8px 12px;
+      border-radius:8px;
+      background:#fff;
+      border:1px solid rgba(0,0,0,0.06);
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Continue with Google</h1>
+    <p>Google bilan tizimga kirish (ID token yasaydi). Demo maqsadlarida ishlatishingiz mumkin.</p>
+
+    <!-- Custom-styled button (calls Google ID library) -->
+    <div id="custom-google" class="google-btn" role="button" tabindex="0">
+      <img class="google-logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 533.5 544.3'%3E%3Cpath fill='%23ea4335' d='M533.5 278.4c0-17.7-1.6-35-4.7-51.7H272v97.9h146.9c-6.4 34.4-25 63.6-53.4 83.1v68h86.2c50.5-46.6 81.8-115 81.8-197.3z'/%3E%3Cpath fill='%2344a253' d='M272 544.3c72 0 132.4-23.8 176.5-64.7l-86.2-68c-24.1 16.2-55.2 25.7-90.3 25.7-69 0-127.5-46.6-148.5-109.1H36.3v68.7C80.3 487 168.7 544.3 272 544.3z'/%3E%3Cpath fill='%23fbbc05' d='M123.5 326.3c-6.7-19.9-10.6-41-10.6-62.7s3.8-42.8 10.6-62.7V132.2H36.3C13.2 175.5 0 219.5 0 263.5s13.2 88 36.3 131.3l87.2-68.5z'/%3E%3Cpath fill='%23166be0' d='M272 107.7c38.8 0 73.9 13.4 101.4 39l76-76C402.1 24.9 344.3 0 272 0 168.7 0 80.3 57.3 36.3 140.9l87.2 68.7C144.5 154.3 203 107.7 272 107.7z'/%3E%3C/svg%3E" alt="G" />
+      <span>Continue with Google</span>
+    </div>
+
+    <!-- Or use Google's official button rendering (optional) -->
+    <div id="gsi-button"></div>
+
+    <div id="profileArea" style="display:none;">
+      <div class="profile">
+        <img id="avatar" class="avatar" src="" alt="avatar">
+        <div>
+          <div class="meta"><strong id="name">Name</strong><span id="email">email@example.com</span></div>
+        </div>
+        <button id="signoutBtn" class="signout">Sign out</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // TODO: BU YERGA O'Z CLIENT_ID'ingizni qo'ying:
+    const CLIENT_ID = '88838738684-glt1921pqaddvjr1qa0f5t0spqen7711.apps.googleusercontent.com';
+
+    // decode JWT token to get profile info (no external lib)
+    function parseJwt (token) {
+      try {
+        const payload = token.split('.')[1];
+        const json = atob(payload.replace(/-/g, '+').replace(/_/g, '/'));
+        return JSON.parse(decodeURIComponent(escape(json)));
+      } catch (e) {
+        console.error('JWT parse error', e);
+        return null;
+      }
+    }
+
+    // callback when Google returns credential (ID token)
+    function handleCredentialResponse(response) {
+      // response.credential is the ID token (JWT)
+      const data = parseJwt(response.credential);
+      if (!data) { alert('Failed to parse ID token'); return; }
+      // show profile
+      document.getElementById('avatar').src = data.picture || '';
+      document.getElementById('name').textContent = data.name || data.sub;
+      document.getElementById('email').textContent = data.email || '';
+      document.getElementById('profileArea').style.display = 'block';
+      // store token if needed (for demo, keep in memory)
+      window._google_id_token = response.credential;
+      console.log('ID Token JWT payload:', data);
+    }
+
+    // initialize Google Identity Services
+    window.onload = function() {
+      if (!CLIENT_ID || CLIENT_ID.includes('YOUR_GOOGLE')) {
+        console.warn('Replace CLIENT_ID with your Google OAuth Client ID.');
+      }
+
+      google.accounts.id.initialize({
+        client_id: CLIENT_ID,
+        callback: handleCredentialResponse,
+        // optionally: auto_select: true, // attempts to auto-sign-in
+      });
+
+      // Render Google's official button (optional)
+      google.accounts.id.renderButton(
+        document.getElementById('gsi-button'),
+        { theme: 'outline', size: 'large', width: 320 } // customization
+      );
+
+      // Attach custom button to request one-tap (or sign-in UI)
+      const customBtn = document.getElementById('custom-google');
+      customBtn.addEventListener('click', function(){
+        // This will open the Google Sign-In pop-up if user needs to pick an account,
+        // or directly call callback if user already authorized.
+        google.accounts.id.prompt(); // shows One-Tap if available or triggers sign-in flow
+      });
+
+      // keyboard accessibility
+      customBtn.addEventListener('keypress', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); customBtn.click(); }
+      });
+
+      // Sign out button (clears local state; to fully revoke session you must revoke token server-side)
+      document.getElementById('signoutBtn').addEventListener('click', function(){
+        // clear stored token and UI
+        window._google_id_token = null;
+        document.getElementById('avatar').src = '';
+        document.getElementById('name').textContent = '';
+        document.getElementById('email').textContent = '';
+        document.getElementById('profileArea').style.display = 'none';
+
+        // tell Google to cancel auto-select for next time
+        google.accounts.id.disableAutoSelect();
+
+        alert('Signed out locally. To fully revoke access, revoke the token from your Google account settings or call revoke endpoint server-side.');
+      });
+    };
+  </script>
+</body>
+</html>

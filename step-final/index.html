@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spynger Checkout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .badges img{
+          height: 32px;
+        }
+
+        @media(max-width:600px){
+          .badges img{
+          height: 23px;
+        }
+
+        .logo{
+          font-size: 15px !important;
+        }
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background-color: #1c1c1c;
+            color: #ffffff;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+
+        .logo {
+            border: 2px solid #f2b601;
+            padding: 8px 20px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #f2b601;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid #555;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .chat-icon {
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .content-wrapper {
+            padding: 40px 20px 60px;
+        }
+
+        .final-step {
+            text-align: center;
+            color: #f2b601;
+            font-size: 15px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+
+        .payment-section {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #3a3a3a;
+            padding: 30px 20px;
+            margin-bottom: 40px;
+        }
+
+        .form-row-top {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .form-row-bottom {
+            display: grid;
+            grid-template-columns: 1.01fr 1.01fr 2fr;
+            gap: 12px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-field {
+            width: 100%;
+            background: #2b2b2b;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 12px 12px 12px 40px;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.2s;
+            height: 45px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #888;
+        }
+
+        .input-field.no-icon {
+            padding: 12px;
+            height: 45px;
+        }
+
+        .card-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        .help-icon {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            color: #2b2b2b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: help;
+        }
+
+        .input-label {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 14px;
+            pointer-events: none;
+            transition: all 0.2s ease;
+            background: transparent;
+        }
+
+        .input-label.with-icon {
+            left: 40px;
+        }
+
+        .input-field:focus + .input-label,
+        .input-field:not(:placeholder-shown) + .input-label {
+            top: -8px;
+            transform: translateY(0);
+            font-size: 11px;
+            color: #999;
+            background: #3a3a3a;
+            padding: 0 4px;
+            left: 12px;
+        }
+
+        .input-field:focus + .input-label.with-icon,
+        .input-field:not(:placeholder-shown) + .input-label.with-icon {
+            left: 12px;
+        }
+
+        .required {
+            color: #f44336;
+        }
+
+        .details-section {
+            max-width: 640px;
+            margin: 0 auto 40px;
+            color: #fff;
+        }
+
+        .details-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            position: relative;
+        }
+
+        .detail-row::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, #555 50%, transparent 50%);
+            background-size: 8px 1px;
+            background-repeat: repeat-x;
+        }
+
+        .detail-label {
+            color: #bbb;
+            font-size: 15px;
+        }
+
+        .detail-value {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .price-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 15px;
+        }
+
+        .price-new {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .coupon-btn {
+            background: transparent;
+            border: none;
+            color: #f2b601;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+            display: block;
+            margin: 20px auto 0;
+            text-decoration: underline;
+        }
+
+        .submit-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .submit-btn {
+            background: #cccccc;
+            color: #888;
+            border: none;
+            padding: 16px 80px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: not-allowed;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s;
+        }
+
+        .submit-btn.active {
+            background: #f2b601;
+            color: white;
+            cursor: pointer;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            padding: 0 20px;
+        }
+
+        .badge {
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+        }
+
+        .badge-text {
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .visa { color: #1a1f71; }
+        .mastercard { color: #eb001b; }
+        .discover { color: #ff6000; }
+        .amex { color: #006fcf; }
+
+        .disclaimer {
+            max-width: 640px;
+            margin: 0 auto 60px;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            line-height: 1.7;
+            padding: 0 20px;
+        }
+
+        .disclaimer a {
+            color: #f2b601;
+            text-decoration: underline;
+        }
+
+        .disclaimer-note {
+            margin-top: 15px;
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #888;
+            font-size: 13px;
+            border-top: 1px solid #444;
+        }
+
+        .footer-links {
+            margin: 15px 0;
+        }
+
+        footer a {
+            color: #f2b601;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .form-row-top,
+            .form-row-bottom {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-section {
+                padding: 30px 20px;
+            }
+
+            .title {
+                font-size: 28px;
+            }
+
+            header{
+              padding: 20px;
+            }
+        }
+
+        .Language_language__UMUXU.Language_isFunnel__oLHiM {
+    justify-self: end;
+    margin: 0px;
+}
+
+.Language_language__UMUXU {
+    position: relative;
+    z-index: 10;
+    width: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    grid-area: 1 / 3 / 1 / 3;
+    align-self: center;
+}
+
+.Language_language__top__MUENI {
+    height: 38px;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    background-color: rgb(28, 28, 28);
+    width: 38px;
+    left: 1px;
+    transition: 0.3s;
+    text-transform: uppercase;
+    border: 1px solid rgb(242, 182, 1);
+    box-sizing: border-box;
+}
+
+@media (min-width: 992px) {
+    .Language_language__items__Wb7xU.Language_active__mOHdk {
+        max-height: 570px;
+    }
+}
+
+.Language_language__items__Wb7xU.Language_active__mOHdk {
+    border: 1px solid rgb(242, 182, 1);
+    max-height: 570px;
+}
+
+.Language_language__items__Wb7xU {
+    background-color: rgb(28, 28, 28);
+    box-sizing: border-box;
+    width: 80px;
+    left: -40px;
+    overflow: hidden;
+    transition: max-height 0.3s;
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.Language_language__item__De1Sr {
+    text-align: center;
+    padding: 13px 0px;
+    color: rgb(242, 182, 1);
+    font-weight: 400;
+    display: block;
+    font-size: 13px;
+    line-height: 18px;
+    background-color: rgb(28, 28, 28);
+    transition: background-color 0.3s 
+ease-out, color 0.3s 
+ease-out;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+ .Language_language__UMUXU{
+            margin-right: 0 !important;
+        }
+
+        .active_navbar {
+            display: none;
+        }
+
+        .non_active {
+            display: flex;
+            z-index: 111111111;
+        }
+
+        .for_background{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: none;
+            cursor: pointer;
+        }
+
+        .for_background_active{
+            display: flex;
+        }
+
+        .Language_language__items__Wb7xU{
+            width: 38px !important;
+            height: 38px !important;
+            left: 1px !important;
+            padding: 0 !important;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .Language_language__item__De1Sr{
+            width: 100%;
+        }
+
+        .active_navbar a:hover{
+          background-color: #f2b601 !important;
+          color: white !important;
+        }
+
+        a{
+          text-decoration: none
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div onclick="window.location='../'" class="logo">SPYNGER</div>
+            <div class="Language_language__UMUXU Language_active__mOHdk">
+                    <div onclick="click_navbar()"
+                        class="Language_language__top__MUENI"><span>en</span>
+                    </div>
+                    <div class="Language_language__items__Wb7xU Language_active__mOHdk active_navbar">
+                        <a aria-label="Change language to ar" class="Language_language__item__De1Sr" href="../ar/step-final">ar</a>
+                    </div>
+                    <div onclick="non_click()" class="for_background"></div>
+                </div>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="final-step">Final step</div>
+            <h1 class="title">Add your payment info</h1>
+
+            <div class="payment-section">
+                <form id="payment-form">
+                    <div class="form-row-top">
+                        <div class="input-group">
+                            <svg class="card-icon" width="20" height="14" viewBox="0 0 24 16" fill="none" stroke="currentColor">
+                                <rect x="2" y="2" width="20" height="12" rx="2" stroke-width="1.5"/>
+                                <path d="M2 6H22" stroke-width="1.5"/>
+                            </svg>
+                            <input type="text" class="input-field" id="card-number" placeholder=" " maxlength="19" />
+                            <label class="input-label with-icon" for="card-number">Card number<span class="required">*</span></label>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="input-field no-icon" id="card-exp" placeholder=" " maxlength="5" />
+                            <label class="input-label" for="card-exp">MM/YY<span class="required">*</span></label>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="input-field no-icon" id="card-cvv" placeholder=" " maxlength="4" />
+                            <label class="input-label" for="card-cvv">CVV/CVC<span class="required">*</span></label>
+                            <span class="help-icon">?</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row-bottom">
+                        <div class="input-group">
+                            <input type="text" class="input-field no-icon" id="first-name" placeholder=" " maxlength="40" />
+                            <label class="input-label" for="first-name">First name<span class="required">*</span></label>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="input-field no-icon" id="last-name" placeholder=" " maxlength="40" />
+                            <label class="input-label" for="last-name">Last name<span class="required">*</span></label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" class="input-field no-icon" id="email" placeholder=" " value="" />
+                            <label class="input-label" for="email">Email<span class="required">*</span></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="details-section">
+                <div class="details-title">Order Details:</div>
+                <div class="detail-row">
+                    <span class="detail-label">Your choice</span>
+                    <span class="detail-value">Spynger 1-Month Premium Plan</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Daily price:</span>
+                    <div class="price-wrapper">
+                        <span class="price-old">$2.41</span>
+                        <span class="price-new">$1.57</span>
+                    </div>
+                </div>
+                <button class="coupon-btn">Got a coupon?</button>
+            </div>
+
+            <div class="submit-container">
+                <button type="submit" class="submit-btn" id="submit-btn">Submit order</button>
+            </div>
+
+            <div class="badges">
+                <img src="./images/Без названия.webp" alt="">
+                <img src="./images/Без названия (1).webp" alt="">
+                <img src="./images/Без названия (2).webp" alt="">
+                <img src="./images/Без названия (3).webp" alt="">
+                <img src="./images/Без названия (4).webp" alt="">
+                <img src="./images/Без названия (5).webp" alt="">
+            </div>
+
+            <div class="disclaimer">
+                By submitting this order, you confirm that you have read and agreed to our 
+                <a href="#">Refund Policy</a> and <a href="#">Compatibility Policy</a> 
+                and are aware that, in some cases, you'll need physical access to the device.
+                <span class="disclaimer-note">
+                    Note: Your payment may be processed as separate transactions - one for the main purchase and another for service-related processing.
+                </span>
+            </div>
+        </div>
+
+        <footer>
+            <div>© SPYNGER.NET 2025</div>
+            <div class="footer-links">
+                <a href="#">Terms and Conditions</a> | <a href="#">Privacy Policy</a>
+            </div>
+            <div><a href="mailto:sales@spynger.net">sales@spynger.net</a></div>
+        </footer>
+    </div>
+
+    <script>
+
+      document.getElementById("email").value=localStorage.getItem("email")
+
+      if (localStorage.getItem("steps")== 'step-2') {
+        document.querySelector(".detail-value").innerHTML='Spynger 3-Month Premium Plan'
+        document.querySelector(".price-old").innerHTML='$1.43'
+        document.querySelector(".price-new").innerHTML='$0.93'
+      }
+
+        const emailInput = document.getElementById('email');
+        const submitBtn = document.getElementById('submit-btn');
+
+        emailInput.addEventListener('input', function() {
+            const emailValue = emailInput.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (emailRegex.test(emailValue)) {
+                submitBtn.classList.add('active');
+            } else {
+                submitBtn.classList.remove('active');
+            }
+        });
+
+        // Card number formatting
+        const cardInput = document.getElementById('card-number');
+        cardInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Expiry date formatting
+        const expInput = document.getElementById('card-exp');
+        expInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Initial check
+        if (emailInput.value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+            submitBtn.classList.add('active');
+        }
+
+
+          function click_navbar() {
+            document.querySelector(".Language_language__top__MUENI").classList.toggle("Language_language__top-active__5vJvj")
+            document.querySelector(".active_navbar").classList.toggle("non_active")
+            document.querySelector(".for_background").classList.toggle("for_background_active")
+        }
+
+        function non_click() {
+            document.querySelector(".active_navbar").classList.remove("non_active")
+            document.querySelector(".for_background").classList.remove("for_background_active")
+            document.querySelector(".Language_language__top__MUENI").classList.remove("Language_language__top-active__5vJvj")
+        }
+
+    </script>
+</body>
+</html>
