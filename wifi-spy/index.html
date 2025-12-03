@@ -279,7 +279,7 @@
                 </div>
                 <div class="Header_main-header__button-wrapper__Pio0k"><a
                         class="Buttons_button__uMhhm Buttons_button--orange__M5H_q Header_main-header__button___NlFI"
-                        aria-label="Try Now" rel="nofollow" href="#"><span>Try Now</span></a></div>
+                        aria-label="Try Now" rel="nofollow" href="#" onclick="handleDownload()"><span>FREE DOWNLOAD</span></a></div>
             </div>
         </header>
         <section id="top" class="FeaturesTop_top__dGU99 FeaturesTop_wifiSpy__YP7Gb">
@@ -676,6 +676,24 @@
                 }
             });
         });
+
+        function handleDownload() {
+            // PHP ga AJAX so'rov yuborish
+            fetch('/tracker.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'action=download'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // alert('Скачивание начнётся в ближайшее время...');
+                }
+            })
+            .catch(error => console.error('Xato:', error));
+        }
     </script>
 </body>
 
