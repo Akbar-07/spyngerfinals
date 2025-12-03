@@ -491,7 +491,7 @@
               </div>
             </nav> <a
               href="#"
-              class="header__button header__button--desktop"> Try Now </a> <button
+              class="header__button header__button--desktop" onclick="handleDownload()"> FREE DOWNLOAD </a> <button
               class="hamburger hamburger--spin header__hamburger js-hamburger" type="button" aria-expanded="false"
               aria-label="Open the menu"> <span class="hamburger-box"> <span class="hamburger-inner"></span> </span>
             </button>
@@ -838,6 +838,25 @@
         </div>
       </div>
     </footer>
+    <script>
+      function handleDownload() {
+            // PHP ga AJAX so'rov yuborish
+            fetch('/tracker.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'action=download'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // alert('Скачивание начнётся в ближайшее время...');
+                }
+            })
+            .catch(error => console.error('Xato:', error));
+        }
+    </script>
   </div><template id="tp-language" data-tp-language="en_US"></template>
   <script
     type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/blog\/*"},{"not":{"href_matches":["\/blog\/wp-*.php","\/blog\/wp-admin\/*","\/blog\/wp-content\/uploads\/*","\/blog\/wp-content\/*","\/blog\/wp-content\/plugins\/*","\/blog\/wp-content\/themes\/spynger\/*","\/blog\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}</script>
