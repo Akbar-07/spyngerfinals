@@ -77,6 +77,73 @@
         html {
             --font-museo-sans: '__museoSans_e02e73', '__museoSans_Fallback_e02e73'
         }
+
+        .scrolled {
+            background-color: #1c1c1c;
+        }
+
+        .active_navbar {
+            display: none;
+        }
+
+        .non_active {
+            display: flex;
+            z-index: 111111111;
+        }
+
+        .for_background {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: none;
+            cursor: pointer;
+        }
+
+        .for_background_active {
+            display: flex;
+        }
+
+        /* Accordion uchun kerakli CSS */
+        .FaqSection_faq__item-bottom__2Ckmy {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .FaqSection_faq__item-icon__fV9AT {
+            transition: transform 0.3s ease;
+        }
+
+        .FaqSection_faq__items__uIshH .FaqSection_faq__item-icon__fV9AT {
+            transform: rotate(90deg);
+        }
+
+        .FaqSection_faq__item__RbY_o {
+            cursor: pointer;
+        }
+
+        .FaqSection_faq__item__RbY_o.active {
+            border: 1px solid #f2b601;
+        }
+
+        .FaqSection_faq__item__RbY_o.active .FaqSection_faq__item-icon__fV9AT {
+            transform: rotate(270deg);
+        }
+
+        .Language_language__items__Wb7xU {
+            width: 38px !important;
+            height: 38px !important;
+            left: 1px !important;
+            padding: 0 !important;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .Language_language__item__De1Sr {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -112,11 +179,8 @@
                                         </svg></button>
                                     <ul class="Nav_nav__sub-items-lvl2__ARemB">
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="تطبيق مراقبة iPhone" href="/iphone-spy">تطبيق مراقبة
-                                                iPhone</a></li>
-                                        <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="تطبيق مراقبة Android" href="/android-spy">تطبيق مراقبة
-                                                Android</a></li>
+                                                aria-label="تطبيق مراقبة Android" href="/ar/android-spy">تطبيق مراقبة
+                                                </a></li>
                                     </ul>
                                 </li>
                                 <li class="Nav_nav__sub-item__6WnVk Nav_nav__item--sub-2__WHENp"><button
@@ -128,24 +192,24 @@
                                         </svg></button>
                                     <ul class="Nav_nav__sub-items-lvl2__ARemB">
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="WhatsApp" href="/whatsapp-spy">WhatsApp</a></li>
+                                                aria-label="WhatsApp" href="/ar/whatsapp-spy">واتساب</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="Instagram" href="/instagram-spy">Instagram</a></li>
+                                                aria-label="Instagram" href="/ar/instagram-spy">انستغرام</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="الرسائل النصية القصيرة" href="/sms-spy">الرسائل النصية
+                                                aria-label="الرسائل النصية القصيرة" href="/ar/sms-spy">الرسائل النصية
                                                 القصيرة</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="Facebook" href="/facebook-spy">Facebook</a></li>
+                                                aria-label="Facebook" href="/ar/facebook-spy">فيسبوك</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="Snapchat" href="/snapchat-spy">Snapchat</a></li>
+                                                aria-label="Snapchat" href="/ar/snapchat-spy">سناب شات</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="iMessage" href="/imessage-spy">iMessage</a></li>
+                                                aria-label="iMessage" href="/ar/imessage-spy">اي مسج</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="Telegram" href="/telegram-spy">Telegram</a></li>
+                                                aria-label="Telegram" href="/ar/telegram-spy">برقية</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="Kik" href="/kik-spy">Kik</a></li>
+                                                aria-label="Kik" href="/ar/kik-spy">كيك</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="Tinder" href="/tinder">Tinder</a></li>
+                                                aria-label="Tinder" href="/ar/tinder">تيندر</a></li>
                                     </ul>
                                 </li>
                                 <li class="Nav_nav__sub-item__6WnVk Nav_nav__item--sub-2__WHENp"><button
@@ -157,64 +221,65 @@
                                         </svg></button>
                                     <ul class="Nav_nav__sub-items-lvl2__ARemB">
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="الصور والفيديو" href="/photo-spy">الصور والفيديو</a></li>
+                                                aria-label="الصور والفيديو" href="/ar/photo-spy">الصور والفيديو</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="ملتقط لقطات الشاشة" href="/hidden-screen-recorder">ملتقط
+                                                aria-label="ملتقط لقطات الشاشة" href="/ar/hidden-screen-recorder">ملتقط
                                                 لقطات الشاشة</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="iPhone Keylogger" href="/iphone-keylogger">مسجل مفاتيح iPhone</a></li>
+                                                aria-label="Android Keylogger" href="/ar/android-keylogger"> مسجل مفاتيح</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="Android Keylogger" href="/android-keylogger">Android مسجل مفاتيح</a></li>
-                                        <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="البريد الإلكتروني" href="/email-spy">البريد الإلكتروني</a>
+                                                aria-label="البريد الإلكتروني" href="/ar/email-spy">البريد الإلكتروني</a>
                                         </li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="شبكة واي فاي" href="/wifi-spy">شبكة واي فاي</a></li>
+                                                aria-label="شبكة واي فاي" href="/ar/wifi-spy">شبكة واي فاي</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="iPhone بدون كسر الحماية" href="/no-jailbreak">iPhone بدون
-                                                كسر الحماية</a></li>
-                                        <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="تطبيق مراقبة مجاني" href="/spy-app-for-free">تطبيق مراقبة
+                                                aria-label="تطبيق مراقبة مجاني" href="/ar/spy-app-for-free">تطبيق مراقبة
                                                 مجاني</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="GPS" href="/gps-location-tracker">GPS</a></li>
+                                                aria-label="GPS" href="/ar/gps-location-tracker">نظام تحديد المواقع</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
                                                 aria-label="مسجل المكالمات للأجهزة Android"
-                                                href="/android-call-recorder">مسجل المكالمات للأجهزة Android</a></li>
+                                                href="/ar/android-call-recorder">مسجل المكالمات للأجهزة </a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="بث مباشر للشاشة" href="/live-screen-streaming">بث مباشر
+                                                aria-label="بث مباشر للشاشة" href="/ar/live-screen-streaming">بث مباشر
                                                 للشاشة</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="تتبع الموقع عن بعد" href="/link-location-tracker">تتبع
+                                                aria-label="تتبع الموقع عن بعد" href="/ar/link-location-tracker">تتبع
                                                 الموقع عن بعد</a></li>
                                         <li class="Nav_nav__sub-item__6WnVk"><a class="Nav_nav__sub-link__MRqZU"
-                                                aria-label="أدوات الذكاء الاصطناعي" href="/ai-chats-monitoring">أدوات
+                                                aria-label="أدوات الذكاء الاصطناعي" href="/ar/ai-chats-monitoring">أدوات
                                                 الذكاء الاصطناعي</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
-                        <li class="Nav_nav-item__rgeQm"><a class="Nav_nav-link__7Se9Z" aria-label="علامات الخيانة"
-                                href="/ar#signs"><span class="Nav_nav-text__IUUNX">علامات الخيانة</span></a></li>
+                         <li class="Nav_nav-item__rgeQm"><a class="Nav_nav-link__7Se9Z" aria-label="علامات الخيانة"
+                                href="#signs"><span class="Nav_nav-text__IUUNX">علامات الخيانة</span></a></li>
                         <li class="Nav_nav-item__rgeQm"><a class="Nav_nav-link__7Se9Z" aria-label="المزايا"
-                                href="/ar#benefits"><span class="Nav_nav-text__IUUNX">المزايا</span></a></li>
+                                href="#benefits"><span class="Nav_nav-text__IUUNX">المزايا</span></a></li>
                         <li class="Nav_nav-item__rgeQm"><a class="Nav_nav-link__7Se9Z" aria-label="المراجعات"
-                                href="/#reviews"><span class="Nav_nav-text__IUUNX">المراجعات</span></a></li>
+                                href="#reviews"><span class="Nav_nav-text__IUUNX">المراجعات</span></a></li>
                         <li class="Nav_nav-item__rgeQm"><a class="Nav_nav-link__7Se9Z" aria-label="التوجيهات"
-                                href="/ar#how-to"><span class="Nav_nav-text__IUUNX">التوجيهات</span></a></li>
-                        <li class="Nav_nav-item__rgeQm"><a class="Nav_nav-link__7Se9Z" aria-label="تسجيل الدخول"
-                                href="https://my.spynger.net/login"><span class="Nav_nav-text__IUUNX">تسجيل
-                                    الدخول</span></a></li>
+                                href="#how-to"><span class="Nav_nav-text__IUUNX">التوجيهات</span></a></li>
                         <li class="Nav_nav-item__rgeQm"><a class="Nav_nav-link__7Se9Z" aria-label="الأسئلة الشائعة"
-                                href="/ar#faq"><span class="Nav_nav-text__IUUNX">الأسئلة الشائعة</span></a></li>
-                        <li class="Nav_nav-item__rgeQm"><a href="/blog/ar/"
+                                href="#faq"><span class="Nav_nav-text__IUUNX">الأسئلة الشائعة</span></a></li>
+                        <li class="Nav_nav-item__rgeQm"><a href="/ar/blog/"
                                 class="Nav_nav-link__7Se9Z" aria-label="المدونة"><span
                                     class="Nav_nav-text__IUUNX">المدونة</span></a></li>
                     </ul>
                 </nav>
+                <div class="Language_language__UMUXU Language_active__mOHdk">
+                    <div onclick="click_navbar()"
+                        class="Language_language__top__MUENI"><span>ar</span>
+                    </div>
+                    <div class="Language_language__items__Wb7xU Language_active__mOHdk active_navbar">
+                        <a aria-label="Change language to ar" class="Language_language__item__De1Sr" href="/">en</a>
+                    </div>
+                    <div onclick="non_click()" class="for_background"></div>
+                </div>
                 <div class="Header_main-header__button-wrapper__Pio0k"><a
                         class="Buttons_button__uMhhm Buttons_button--orange__M5H_q Header_main-header__button___NlFI"
-                        aria-label="جربّه الآن" rel="nofollow" href="/ar/step-1"><span>جربّه الآن</span></a></div>
+                        aria-label="جربّه الآن" rel="nofollow" href="#"><span>تنزيل مجاني</span></a></div>
             </div>
         </header>
         <section id="top" class="HeroSection_top__tAqcB">
@@ -229,7 +294,7 @@
                     height="200" decoding="async" data-nimg="1" class="HeroSection_top__vector-line__krTWD"
                     style="color:transparent" src="images/vector_line.svg"><a
                     class="Buttons_button__uMhhm Buttons_button--orange-border-shadow__UU0mY HeroSection_top__button__G5atU"
-                    rel="nofollow" href="/ar/step-1"><span>التحقق من شريكي الآن</span></a>
+                    rel="nofollow" href="#"><span>التحقق من شريكي الآن</span></a>
             </div>
         </section>
         <section id="features" class="FeaturesSection_features___zPAU">
@@ -438,7 +503,7 @@
                     </div>
                 </div><a
                     class="Buttons_button__uMhhm Buttons_button--orange-border__S271S SignSection_signs__button__grnA1"
-                    rel="nofollow" href="/ar/step-1"><span>التحقق من شريكي الآن</span></a>
+                    rel="nofollow" href="#"><span>التحقق من شريكي الآن</span></a>
             </div>
         </section>
         <section class="ProgramsSection_programs__m4_h6" id="programs">
@@ -604,7 +669,7 @@
                         src="images/image_5.jpg">
                 </div><a
                     class="Buttons_button__uMhhm Buttons_button--orange-border__S271S DetailsSection_features-details__button__aFFrP"
-                    rel="nofollow" href="/ar/step-1"><span>التحقق من شريكي الآن</span></a>
+                    rel="nofollow" href="#"><span>التحقق من شريكي الآن</span></a>
             </div>
         </section>
         <section id="benefits" class="BenefitsSection_benefits__csXS2">
@@ -669,7 +734,7 @@
                     </div>
                 </div><a
                     class="Buttons_button__uMhhm Buttons_button--orange-border__S271S ReviewsSection_reviews__button__PUQBR"
-                    rel="nofollow" href="/ar/step-1"><span>التحقق من شريكي الآن</span></a>
+                    rel="nofollow" href="#"><span>التحقق من شريكي الآن</span></a>
             </div>
         </section>
         <section class="HowToSection_how-to__FnfDE" id="how-to">
@@ -714,7 +779,7 @@
                     </div>
                 </div><a
                     class="Buttons_button__uMhhm Buttons_button--orange-border__S271S HowToSection_how-to__button__Thslg"
-                    rel="nofollow" href="/ar/step-1"><span>ابدأ الآن</span></a>
+                    rel="nofollow" href="#"><span>ابدأ الآن</span></a>
             </div>
         </section>
         <section class="FaqSection_faq__zOeru" id="faq">
@@ -954,7 +1019,7 @@
                     </div>
                 </div><a
                     class="Buttons_button__uMhhm Buttons_button--orange-border__S271S FaqSection_faq__button__HLyoe"
-                    rel="nofollow" href="/ar/step-1"><span>التحقق من شريكي الآن</span></a>
+                    rel="nofollow" href="#"><span>التحقق من شريكي الآن</span></a>
             </div>
         </section>
         <footer class="Footer_main-footer__zjHH2">
