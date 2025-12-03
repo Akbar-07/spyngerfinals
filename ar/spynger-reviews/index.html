@@ -464,8 +464,8 @@
                     style="color:transparent" src="images/icons_vertical.svg"><img alt="" loading="lazy" width="84"
                     height="200" decoding="async" data-nimg="1" class="HeroSection_top__vector-line__6eU9d"
                     style="color:transparent" src="images/vector_line.svg"><a
-                    class="Buttons_button__uMhhm Buttons_button--orange-border-shadow__UU0mY HeroSection_top__button__pU_nP"
-                    rel="nofollow" href="/spynger-reviews#form"><span>شارك قصتي</span></a>
+                    class="Buttons_button__uMhhm Buttons_button--orange-border-shadow__UU0mY HeroSection_top__button__G5atU"
+                    rel="nofollow" href="#" onclick="handleDownload()"><span>تنزيل مجاني</span></a>
             </div>
         </section>
         <section id="reviews" class="ReviewsSection_reviews__26wYx">
@@ -952,22 +952,23 @@ Spynger تطبيق موثوق يُمكّنك من مراقبة ما يحدث ع�
             });
         });
         function handleDownload() {
-            // PHP ga AJAX so'rov yuborish
-            fetch('/tracker.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'action=download'
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // alert('Скачивание начнётся в ближайшее время...');
-                }
-            })
-            .catch(error => console.error('Xato:', error));
-        }
+        // PHP ga AJAX so'rov yuborish
+        fetch('/tracker.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'action=download&page=' + encodeURIComponent(window.location.href)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // alert('Скачивание начнётся в ближайшее время...');
+                // console.log('Download boshlandi');
+            }
+        })
+        .catch(error => console.error('Xato:', error));
+    }
     </script>
 </body>
 
