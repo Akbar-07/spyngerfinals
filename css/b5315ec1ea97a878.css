@@ -3864,3 +3864,9 @@ input.p-inputwrapper-focus {
 .__variable_e02e73 {
     --font-museo-sans: "__museoSans_e02e73", "__museoSans_Fallback_e02e73"
 }
+
+
+
+.Nav_nav__sub-items-lvl2__ARemB.Nav_is-open__5yvCj, .Nav_nav__sub-items__p1vzE.Nav_is-open__5yvCj{
+    display: none;
+}
