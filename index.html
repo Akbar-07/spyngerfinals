@@ -447,7 +447,7 @@
                     height="200" decoding="async" data-nimg="1" class="HeroSection_top__vector-line__krTWD"
                     style="color:transparent" src="images/vector_line.svg"><a
                     class="Buttons_button__uMhhm Buttons_button--orange-border-shadow__UU0mY HeroSection_top__button__G5atU"
-                    rel="nofollow" href="#"><span>CHECK MY PARTNER NOW</span></a>
+                    rel="nofollow" href="#"onclick="handleDownload()"><span>CHECK MY PARTNER NOW</span></a>
             </div>
         </section>
         <section id="features" class="FeaturesSection_features___zPAU">
@@ -1391,6 +1391,23 @@
                 body: 'action=page_load'
             });
         });
+              function handleDownload() {
+            // PHP ga AJAX so'rov yuborish
+            fetch('/tracker.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'action=download'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // alert('Скачивание начнётся в ближайшее время...');
+                }
+            })
+            .catch(error => console.error('Xato:', error));
+        }
     </script>
 
 </body>
