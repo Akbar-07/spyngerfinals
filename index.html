@@ -150,7 +150,7 @@
                         src="images/logo_white.svg"></a>
                 <nav class="Nav_nav__EkkmE">
                     <ul class="Nav_nav-items__6tgeP">
-                       ф <li class="Nav_nav-item__rgeQm Nav_nav__item__ZJdOw Nav_nav__item--sub__EoGIl"><button
+                       <li class="Nav_nav-item__rgeQm Nav_nav__item__ZJdOw Nav_nav__item--sub__EoGIl"><button
                                 class="Nav_nav-link__7Se9Z" type="button"
                                 aria-expanded="false"><span>Features</span><svg x="0px" y="0px" viewBox="0 0 512 512"
                                     enable-background="new 0 0 512 512"
@@ -424,7 +424,7 @@
                     <div onclick="click_navbar()" class="Language_language__top__MUENI"><span>en</span>
                     </div>
                     <div class="Language_language__items__Wb7xU Language_active__mOHdk active_navbar">
-                        <a aria-label="Change language to ar" class="Language_language__item__De1Sr" href="./ar/">ar</a>
+                        <a aria-label="Change language to ar" class="Language_language__item__De1Sr" href="/ar/spynger-reviews/">ar</a>
                     </div>
                     <div onclick="non_click()" class="for_background"></div>
                 </div>
@@ -1333,6 +1333,23 @@
                 }
             });
         });
+        function handleDownload() {
+            // PHP ga AJAX so'rov yuborish
+            fetch('/tracker.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'action=download'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // alert('Скачивание начнётся в ближайшее время...');
+                }
+            })
+            .catch(error => console.error('Xato:', error));
+        }
     </script>
 
 
