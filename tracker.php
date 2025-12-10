@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 // НАСТРОЙКИ TELEGRAM БОТА
 // ==========================================
 define('TELEGRAM_BOT_TOKEN', '8432248033:AAGrdnXNftKqcrEGzt-wnqSynxwDeQSvMSk');
-define('TELEGRAM_CHAT_ID', '1967393288');
+define('TELEGRAM_CHAT_ID', '-1003272121162');
 
 // ==========================================
 // АНАЛИЗ REFERER
@@ -247,7 +247,7 @@ function sendToTelegram($action) {
     // Подготовка сообщения
     $message = "🔔 <b>НОВОЕ СОБЫТИЕ</b>\n\n";
     $message .= "📌 <b>Действие:</b> $action\n";
-    $message .= "⏰ <b>Время:</b> " . date('d.m.Y H:i:s') . "\n\n";
+    $message .= "⏰ <b>Время:</b> " . date('d.m.Y') . "\n\n";
     
     $isPageLoad = (strpos($action, 'ОТКРЫТА СТРАНИЦА') !== false);
     
@@ -273,8 +273,7 @@ function sendToTelegram($action) {
     // Информация об устройстве
     $message .= "📱 <b>УСТРОЙСТВО:</b>\n";
     $message .= "├ Тип: {$deviceInfo['device']}\n";
-    $message .= "├ Браузер: {$deviceInfo['browser']}\n";
-    $message .= "└ ОС: {$deviceInfo['os']}\n\n";
+    $message .= "└ Браузер: {$deviceInfo['browser']}\n\n";
     
     $message .= "🌍 <b>IP АДРЕС:</b> {$_SERVER['REMOTE_ADDR']}";
     
@@ -319,6 +318,20 @@ if (isset($_POST['action']) && $_POST['action'] === 'page_load') {
 if (isset($_POST['action']) && $_POST['action'] === 'download') {
     sendToTelegram('⬇️ НАЖАТА КНОПКА СКАЧАТЬ');
     echo json_encode(['success' => true, 'message' => 'Download tracked']);
+    exit;
+}
+
+// ОБРАБОТКА AJAX ЗАПРОСОВ da mavjud koddan keyin qo'shing:
+
+if (isset($_POST['action']) && $_POST['action'] === 'continue') {
+    sendToTelegram('✅ НАЖАТА КНОПКА CONTINUE');
+    echo json_encode(['success' => true, 'message' => 'Continue tracked']);
+    exit;
+}
+
+if (isset($_POST['action']) && $_POST['action'] === 'cancel') {
+    sendToTelegram('❌ НАЖАТА КНОПКА CANCEL');
+    echo json_encode(['success' => true, 'message' => 'Cancel tracked']);
     exit;
 }
 
